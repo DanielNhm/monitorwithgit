@@ -1,118 +1,36 @@
-<<<<<<< HEAD
+<%@ page language="java" contentType="text/html; charset=windows-1255"
+    pageEncoding="windows-1255"%>
+<!DOCTYPE html>
 <html>
 <head>
-  <title>Order Book!!</title>
+<meta charset="windows-1255">
+<title>Insert title here2333</title>
 </head>
- 
 <body>
-  <h1>Another E-Bookstore</h1>
-  <h2>Thank you for ordering...</h2>
- 
-  <%
-    String[] ids = request.getParameterValues("id");
-    if (ids != null) {
-  %>
-  <%@ page import = "java.sql.*" %>
-  <%
-      Connection conn = DriverManager.getConnection(
-          "jdbc:mysql://localhost:8888/ebookshop", "myuser", "xxxx"); // <== Check!
-      // Connection conn =
-      //    DriverManager.getConnection("jdbc:odbc:eshopODBC");  // Access
-      Statement stmt = conn.createStatement();
-      String sqlStr;
-      int recordUpdated;
-      ResultSet rset;
-  %>
-      <table border=1 cellpadding=3 cellspacing=0>
-        <tr>
-          <th>Author</th>
-          <th>Title</th>
-          <th>Price</th>
-          <th>Qty In Stock</th>
-        </tr>
-  <%
-      for (int i = 0; i < ids.length; ++i) {
-        // Subtract the QtyAvailable by one
-        sqlStr = "UPDATE books SET qty = qty - 1 WHERE id = " + ids[i];
-        recordUpdated = stmt.executeUpdate(sqlStr);
-        // carry out a query to confirm
-        sqlStr = "SELECT * FROM books WHERE id =" + ids[i];
-        rset = stmt.executeQuery(sqlStr);
-        while (rset.next()) {
-  %>
-          <tr>
-            <td><%= rset.getString("author") %></td>
-            <td><%= rset.getString("title") %></td>
-            <td>$<%= rset.getInt("price") %></td>
-            <td><%= rset.getInt("qty") %></td>
-          </tr>
-  <%    }
-        rset.close();
-      }
-      stmt.close();
-      conn.close();
-    }
-  %>
-  </table>
-  <a href="query.jsp"><h3>BACK</h3></a>
+
+	
+<%
+	StringBuffer sb = new StringBuffer();
+	sb.append("<table border = 2 >");
+	
+	int size = 10;
+	for (int i=1 ; i <= size ; i++){
+		sb.append("<tr>");
+		
+		for(int j = 1; j <= size ; j++){
+			
+			sb.append("<td>" + (i*j) + "</td>");
+			
+			
+		}
+		sb.append("</tr>");
+		
+	}
+	sb.append("</table>");
+	
+%>
+	
+<%= sb.toString() %>
+
 </body>
-=======
-<html>
-<head>
-  <title>Order Book</title>
-</head>
- 
-<body>
-  <h1>Another E-Bookstore</h1>
-  <h2>Thank you for ordering...</h2>
- 
-  <%
-    String[] ids = request.getParameterValues("id");
-    if (ids != null) {
-  %>
-  <%@ page import = "java.sql.*" %>
-  <%
-      Connection conn = DriverManager.getConnection(
-          "jdbc:mysql://localhost:8888/ebookshop", "myuser", "xxxx"); // <== Check!
-      // Connection conn =
-      //    DriverManager.getConnection("jdbc:odbc:eshopODBC");  // Access
-      Statement stmt = conn.createStatement();
-      String sqlStr;
-      int recordUpdated;
-      ResultSet rset;
-  %>
-      <table border=1 cellpadding=3 cellspacing=0>
-        <tr>
-          <th>Author</th>
-          <th>Title</th>
-          <th>Price</th>
-          <th>Qty In Stock</th>
-        </tr>
-  <%
-      for (int i = 0; i < ids.length; ++i) {
-        // Subtract the QtyAvailable by one
-        sqlStr = "UPDATE books SET qty = qty - 1 WHERE id = " + ids[i];
-        recordUpdated = stmt.executeUpdate(sqlStr);
-        // carry out a query to confirm
-        sqlStr = "SELECT * FROM books WHERE id =" + ids[i];
-        rset = stmt.executeQuery(sqlStr);
-        while (rset.next()) {
-  %>
-          <tr>
-            <td><%= rset.getString("author") %></td>
-            <td><%= rset.getString("title") %></td>
-            <td>$<%= rset.getInt("price") %></td>
-            <td><%= rset.getInt("qty") %></td>
-          </tr>
-  <%    }
-        rset.close();
-      }
-      stmt.close();
-      conn.close();
-    }
-  %>
-  </table>
-  <a href="query.jsp"><h3>BACK</h3></a>
-</body>
->>>>>>> 9e6678cc8c543eae584936a29d50b6cc7250f2c6
 </html>
